@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'User',
 ]
 
+AUTH_USER_MODEL = 'User.User'
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -114,9 +116,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'fr-FR'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = "Europe/Paris"
 
 USE_I18N = True
 
