@@ -29,5 +29,7 @@ class UserModelTestCase(TestCase):
 
     def test_is_of_age_far_under_15(self):
         # Utilisateur ayant beaucoup moins de 15 ans
-        user = User(date_of_birth=date(2015, 1, 1))
+        today = date.today()
+        birth_date = date(today.year - 10, today.month, today.day)
+        user = User(date_of_birth=birth_date)
         self.assertFalse(user.is_of_age(15))
