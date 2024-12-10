@@ -17,7 +17,8 @@ class ProjectModelTestCase(TestCase):
     def test_project_creation(self):
         project = Project.objects.create(name='Test Project',
                                          description='A test project',
-                                         author=self.user)
+                                         author=self.user,
+                                         type='Back-end')
         # Vérifie que le nom du projet est bien celui renseigné
         self.assertEqual(project.name, 'Test Project')
         # Vérifie que l'auteur du projet est bien l'user instancié
@@ -33,7 +34,8 @@ class ContributorModelTestCase(TestCase):
                                              date_of_birth='2002-11-22')
         self.project = Project.objects.create(name='Test Project',
                                               description='A test project',
-                                              author=self.user)
+                                              author=self.user,
+                                              type='Back-end')
 
     # Vérifie le bon fonctionnement de la création d'un objet 'Contributor'
     def test_contributor_creation(self):
