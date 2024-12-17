@@ -1,3 +1,5 @@
+import uuid
+
 from django.db import models
 from User.models import User
 
@@ -79,12 +81,26 @@ class Issue(models.Model):
                                     on_delete=models.SET_NULL,
                                     related_name='assigned_issues')
     priority = models.CharField(max_length=10, choices=PRIORITY_CHOICES,
-                                default='MEDIUM')
-    tag = models.CharField(max_length=10, choices=TAG_CHOICES, default='TASK')
-    status = models.CharField(max_length=15, choices=STATUS_CHOICES,
+                                null=True, default='MEDIUM')
+    tag = models.CharField(max_length=10, choices=TAG_CHOICES, null=True,
+                           default='TASK')
+    status = models.CharField(max_length=15, choices=STATUS_CHOICES, null=True,
                               default='TODO')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.title
+
+
+class Comment(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    content = models.TextField()
+    issue = models.ForeignKey(Issue, related_name='comments',
+                              on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"Commentaire de {self.author} pour {self.issue.title}"

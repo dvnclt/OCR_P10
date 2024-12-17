@@ -3,18 +3,19 @@ from .models import User
 
 
 class UserSerializer(serializers.ModelSerializer):
+    user_id = serializers.IntegerField(source='id', read_only=True)
     password = serializers.CharField(write_only=True)
 
     class Meta:
         model = User
         fields = [
-            'id', 'username', 'password', 'email', 'first_name', 'last_name',
-            'date_of_birth', 'date_joined', 'can_be_contacted',
+            'user_id', 'username', 'password', 'email', 'first_name',
+            'last_name', 'date_of_birth', 'date_joined', 'can_be_contacted',
             'can_data_be_shared', 'is_active', 'last_login', 'is_staff',
             'is_superuser'
         ]
         read_only_fields = [
-            'id', 'date_joined', 'last_login', 'is_staff', 'is_active',
+            'date_joined', 'last_login', 'is_staff', 'is_active',
             'is_superuser'
             ]
 
@@ -28,6 +29,8 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class SimplifiedUserSerializer(serializers.ModelSerializer):
+    user_id = serializers.IntegerField(source='id', read_only=True)
+
     class Meta:
         model = User
-        fields = ['id', 'username', 'email']
+        fields = ['user_id', 'username', 'email']
